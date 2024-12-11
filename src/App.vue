@@ -12,17 +12,45 @@
               <span>SaaS Questionnaire</span>
             </router-link>
           </div>
-          <div class="flex items-center space-x-4">
+
+          <!-- Burger Menu for Small Screens -->
+          <div class="flex items-center sm:hidden">
+            <button 
+              @click="toggleMenu" 
+              class="text-gray-600 hover:text-indigo-600 focus:outline-none"
+            >
+              <svg 
+                class="w-6 h-6" 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M4 6h16M4 12h16m-7 6h7" 
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Menu Items -->
+          <div 
+            :class="{'hidden': !isMenuOpen, 'block': isMenuOpen}" 
+            class="absolute top-16 left-0 w-full bg-white shadow-lg sm:relative sm:top-0 sm:w-auto sm:flex items-center space-x-4"
+          >
             <router-link 
               to="/" 
-              class="px-4 py-2 text-gray-600 hover:text-indigo-600 rounded-md transition-colors duration-300"
+              class="block px-4 py-2 text-gray-600 hover:text-indigo-600 rounded-md transition-colors duration-300 sm:inline-block"
               active-class="text-indigo-600"
             >
               Home
             </router-link>
             <router-link 
               to="/questionnaire" 
-              class="px-4 py-2 text-gray-600 hover:text-indigo-600 rounded-md transition-colors duration-300"
+              class="block px-4 py-2 text-gray-600 hover:text-indigo-600 rounded-md transition-colors duration-300 sm:inline-block"
               active-class="text-indigo-600"
             >
               Questionnaire
@@ -47,8 +75,18 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: 'App',
+  data() {
+    return {
+      isMenuOpen: false,
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+  },
+};
 </script>
 
 <style>
@@ -62,4 +100,3 @@ export default {
   opacity: 0;
 }
 </style>
-
